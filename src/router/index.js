@@ -11,6 +11,10 @@ const routes = [
       import(/* webpackChunkName: "user-layout" */ "../layouts/UserLayout.vue"),
     children: [
       {
+        path: "",
+        redirect: "login"
+      },
+      {
         path: "login",
         name: "login",
         component: () =>
@@ -22,6 +26,60 @@ const routes = [
         component: () =>
           import(
             /* webpackChunkName: "register" */ "../views/User/Register.vue"
+          )
+      }
+    ]
+  },
+  {
+    path: "/dashboard",
+    name: "dashboard",
+    component: { render: h => h("router-view") },
+    children: [
+      {
+        path: "analysis",
+        name: "analysis",
+        component: () =>
+          import(
+            /* webpackChunkName: "analysis" */ "../views/Dashboard/Analysis.vue"
+          )
+      },
+      {
+        path: "monitor",
+        name: "monitor",
+        component: () =>
+          import(
+            /* webpackChunkName: "monitor" */ "../views/Dashboard/Monitor.vue"
+          )
+      }
+    ]
+  },
+  {
+    path: "/form",
+    name: "form",
+    component: { render: h => h("router-view") },
+    children: [
+      {
+        path: "basic-form",
+        name: "basic-form",
+        component: () =>
+          import(
+            /* webpackChunkName: "basic-form" */ "../views/Form/BasicForm.vue"
+          )
+      },
+      {
+        path: "step-form",
+        name: "step-form",
+        component: () =>
+          import(
+            /* webpackChunkName: "step-form" */ "../views/Form/StepForm.vue"
+          )
+      },
+      {
+        path: "advanced-form",
+        name: "advanced-form",
+        component: () =>
+          import(
+            /* webpackChunkName: "advanced-form" */ "../views/Form/AdvancedForm.vue"
           )
       }
     ]
