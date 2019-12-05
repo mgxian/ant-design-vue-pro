@@ -7,7 +7,8 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/user",
-    component: { render: h => h("router-view") },
+    component: () =>
+      import(/* webpackChunkName: "user-layout" */ "../layouts/UserLayout.vue"),
     children: [
       {
         path: "login",
@@ -19,7 +20,9 @@ const routes = [
         path: "register",
         name: "register",
         component: () =>
-          import(/* webpackChunkName: "register" */ "../views/User/Register.vue")
+          import(
+            /* webpackChunkName: "register" */ "../views/User/Register.vue"
+          )
       }
     ]
   },
