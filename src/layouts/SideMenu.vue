@@ -1,5 +1,7 @@
 <template>
-  <div>分步表单</div>
+  <div>
+    Ant Design Vue Pro menu
+  </div>
 </template>
 
 <script>

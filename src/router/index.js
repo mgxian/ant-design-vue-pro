@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+import NotFound from "../views/404.vue";
 
 Vue.use(VueRouter);
 
@@ -33,7 +33,10 @@ const routes = [
   {
     path: "/dashboard",
     name: "dashboard",
-    component: { render: h => h("router-view") },
+    component: () =>
+      import(
+        /* webpackChunkName: "basic-layout" */ "../layouts/BasicLayout.vue"
+      ),
     children: [
       {
         path: "analysis",
@@ -56,7 +59,10 @@ const routes = [
   {
     path: "/form",
     name: "form",
-    component: { render: h => h("router-view") },
+    component: () =>
+      import(
+        /* webpackChunkName: "basic-layout" */ "../layouts/BasicLayout.vue"
+      ),
     children: [
       {
         path: "basic-form",
@@ -69,10 +75,37 @@ const routes = [
       {
         path: "step-form",
         name: "step-form",
-        component: () =>
-          import(
-            /* webpackChunkName: "step-form" */ "../views/Form/StepForm.vue"
-          )
+        component: { render: h => h("router-view") },
+        children: [
+          {
+            path: "",
+            redirect: "info"
+          },
+          {
+            path: "info",
+            name: "info",
+            component: () =>
+              import(
+                /* webpackChunkName: "step-form" */ "../views/Form/StepForm/Step1.vue"
+              )
+          },
+          {
+            path: "confirm",
+            name: "confirm",
+            component: () =>
+              import(
+                /* webpackChunkName: "step-form" */ "../views/Form/StepForm/Step2.vue"
+              )
+          },
+          {
+            path: "result",
+            name: "result",
+            component: () =>
+              import(
+                /* webpackChunkName: "step-form" */ "../views/Form/StepForm/Step3.vue"
+              )
+          }
+        ]
       },
       {
         path: "advanced-form",
@@ -87,16 +120,12 @@ const routes = [
   {
     path: "/",
     name: "home",
-    component: Home
+    redirect: "/dashboard/analysis"
   },
   {
-    path: "/about",
-    name: "about",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue")
+    path: "*",
+    name: "404",
+    component: NotFound
   }
 ];
 
