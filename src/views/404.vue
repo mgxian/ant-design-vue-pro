@@ -1,11 +1,9 @@
 <template>
-  <div>
-    nobody is here !
-  </div>
+  <div>nobody is here !</div>
 </template>
 
 <script>
-export default {};
+export default {}
 </script>
 
 <style />

@@ -1,153 +1,153 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
-import NotFound from "../views/404.vue";
-import NProgress from "nprogress";
-import "nprogress/nprogress.css";
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import NotFound from '../views/404.vue'
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
 
-Vue.use(VueRouter);
+Vue.use(VueRouter)
 
 const routes = [
   {
-    path: "/user",
+    path: '/user',
     component: () =>
-      import(/* webpackChunkName: "user-layout" */ "../layouts/UserLayout.vue"),
+      import(/* webpackChunkName: "user-layout" */ '../layouts/UserLayout.vue'),
     children: [
       {
-        path: "",
-        redirect: "login"
+        path: '',
+        redirect: 'login'
       },
       {
-        path: "login",
-        name: "login",
+        path: 'login',
+        name: 'login',
         component: () =>
-          import(/* webpackChunkName: "login" */ "../views/User/Login.vue")
+          import(/* webpackChunkName: "login" */ '../views/User/Login.vue')
       },
       {
-        path: "register",
-        name: "register",
+        path: 'register',
+        name: 'register',
         component: () =>
           import(
-            /* webpackChunkName: "register" */ "../views/User/Register.vue"
+            /* webpackChunkName: "register" */ '../views/User/Register.vue'
           )
       }
     ]
   },
   {
-    path: "/dashboard",
-    name: "dashboard",
+    path: '/dashboard',
+    name: 'dashboard',
     component: () =>
       import(
-        /* webpackChunkName: "basic-layout" */ "../layouts/BasicLayout.vue"
+        /* webpackChunkName: "basic-layout" */ '../layouts/BasicLayout.vue'
       ),
     children: [
       {
-        path: "analysis",
-        name: "analysis",
+        path: 'analysis',
+        name: 'analysis',
         component: () =>
           import(
-            /* webpackChunkName: "analysis" */ "../views/Dashboard/Analysis.vue"
+            /* webpackChunkName: "analysis" */ '../views/Dashboard/Analysis.vue'
           )
       },
       {
-        path: "monitor",
-        name: "monitor",
+        path: 'monitor',
+        name: 'monitor',
         component: () =>
           import(
-            /* webpackChunkName: "monitor" */ "../views/Dashboard/Monitor.vue"
+            /* webpackChunkName: "monitor" */ '../views/Dashboard/Monitor.vue'
           )
       }
     ]
   },
   {
-    path: "/form",
-    name: "form",
+    path: '/form',
+    name: 'form',
     component: () =>
       import(
-        /* webpackChunkName: "basic-layout" */ "../layouts/BasicLayout.vue"
+        /* webpackChunkName: "basic-layout" */ '../layouts/BasicLayout.vue'
       ),
     children: [
       {
-        path: "basic-form",
-        name: "basic-form",
+        path: 'basic-form',
+        name: 'basic-form',
         component: () =>
           import(
-            /* webpackChunkName: "basic-form" */ "../views/Form/BasicForm.vue"
+            /* webpackChunkName: "basic-form" */ '../views/Form/BasicForm.vue'
           )
       },
       {
-        path: "step-form",
-        name: "step-form",
-        component: { render: h => h("router-view") },
+        path: 'step-form',
+        name: 'step-form',
+        component: { render: h => h('router-view') },
         children: [
           {
-            path: "",
-            redirect: "info"
+            path: '',
+            redirect: 'info'
           },
           {
-            path: "info",
-            name: "info",
+            path: 'info',
+            name: 'info',
             component: () =>
               import(
-                /* webpackChunkName: "step-form" */ "../views/Form/StepForm/Step1.vue"
+                /* webpackChunkName: "step-form" */ '../views/Form/StepForm/Step1.vue'
               )
           },
           {
-            path: "confirm",
-            name: "confirm",
+            path: 'confirm',
+            name: 'confirm',
             component: () =>
               import(
-                /* webpackChunkName: "step-form" */ "../views/Form/StepForm/Step2.vue"
+                /* webpackChunkName: "step-form" */ '../views/Form/StepForm/Step2.vue'
               )
           },
           {
-            path: "result",
-            name: "result",
+            path: 'result',
+            name: 'result',
             component: () =>
               import(
-                /* webpackChunkName: "step-form" */ "../views/Form/StepForm/Step3.vue"
+                /* webpackChunkName: "step-form" */ '../views/Form/StepForm/Step3.vue'
               )
           }
         ]
       },
       {
-        path: "advanced-form",
-        name: "advanced-form",
+        path: 'advanced-form',
+        name: 'advanced-form',
         component: () =>
           import(
-            /* webpackChunkName: "advanced-form" */ "../views/Form/AdvancedForm.vue"
+            /* webpackChunkName: "advanced-form" */ '../views/Form/AdvancedForm.vue'
           )
       }
     ]
   },
   {
-    path: "/",
-    name: "home",
-    redirect: "/dashboard/analysis"
+    path: '/',
+    name: 'home',
+    redirect: '/dashboard/analysis'
   },
   {
-    path: "*",
-    name: "404",
+    path: '*',
+    name: '404',
     component: NotFound
   }
-];
+]
 
 const router = new VueRouter({
-  mode: "history",
+  mode: 'history',
   base: process.env.BASE_URL,
   routes
-});
+})
 
 router.beforeEach((to, from, next) => {
   if (to.path !== from.path) {
-    NProgress.start();
+    NProgress.start()
   }
-  next();
-});
+  next()
+})
 
 router.afterEach((to, from) => {
   if (to.path !== from.path) {
-    NProgress.done();
+    NProgress.done()
   }
-});
+})
 
-export default router;
+export default router

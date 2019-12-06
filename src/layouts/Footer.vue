@@ -1,11 +1,9 @@
 <template>
-  <div>
-    Copyright @2019 Ant Design Vue Pro
-  </div>
+  <div>Ant Design ©2018 Created by Will</div>
 </template>
 
 <script>
-export default {};
+export default {}
 </script>
 
 <style />

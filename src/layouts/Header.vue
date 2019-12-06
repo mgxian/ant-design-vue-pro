@@ -1,11 +1,9 @@
 <template>
-  <div>
-    Ant Design Vue Pro
-  </div>
+  <div>Header</div>
 </template>
 
 <script>
-export default {};
+export default {}
 </script>
 
 <style />
