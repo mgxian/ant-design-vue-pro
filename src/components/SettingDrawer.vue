@@ -1,7 +1,6 @@
 <template>
   <div>
     <a-drawer
-      title="Basic Drawer"
       placement="right"
       :closable="false"
       :visible="visible"
@@ -15,9 +14,18 @@
           @click="visible = !visible"
         />
       </template>
-      <p>Some contents...</p>
-      <p>Some contents...</p>
-      <p>Some contents...</p>
+      <div>
+        <h2>整体风格设置</h2>
+        <a-radio-group :value="navTheme" @change="handleNavThemeChange">
+          <a-radio value="dark">黑色</a-radio>
+          <a-radio value="light">白色</a-radio>
+        </a-radio-group>
+        <h2>导航模式</h2>
+        <a-radio-group :value="navPosition" @change="handleNavPostionChange">
+          <a-radio value="left">左侧</a-radio>
+          <a-radio value="top">顶部</a-radio>
+        </a-radio-group>
+      </div>
     </a-drawer>
   </div>
 </template>
@@ -28,9 +36,35 @@ export default {
       visible: false
     }
   },
+  computed: {
+    navTheme() {
+      return this.$route.query.navTheme || 'dark'
+    },
+    navPosition() {
+      return this.$route.query.navPostion || 'left'
+    }
+  },
   methods: {
     onClose() {
       this.visible = false
+    },
+    handleNavThemeChange(e) {
+      let theme = e.target.value
+      this.$router.push({
+        query: {
+          ...this.$route.query,
+          navTheme: theme
+        }
+      })
+    },
+    handleNavPostionChange(e) {
+      let position = e.target.value
+      this.$router.push({
+        query: {
+          ...this.$route.query,
+          navPostion: position
+        }
+      })
     }
   }
 }

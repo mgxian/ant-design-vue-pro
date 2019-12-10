@@ -1,8 +1,14 @@
 <template>
-  <div>
+  <div :class="[`nav-theme-${navTheme}`, `nav-position-${navPosition}`]">
     <a-layout id="components-layout-demo-side" style="min-height: 100vh">
-      <a-layout-sider v-model="collapsed" collapsible :trigger="null">
-        <div class="logo" />
+      <a-layout-sider
+        v-if="navPosition === 'left'"
+        v-model="collapsed"
+        :theme="navTheme"
+        collapsible
+        :trigger="null"
+      >
+        <div class="logo">Ant Design Vue Pro</div>
         <SideMenu></SideMenu>
       </a-layout-sider>
       <a-layout>
@@ -43,6 +49,14 @@ export default {
     return {
       collapsed: false
     }
+  },
+  computed: {
+    navTheme() {
+      return this.$route.query.navTheme || 'dark'
+    },
+    navPosition() {
+      return this.$route.query.navPostion || 'left'
+    }
   }
 }
 </script>
@@ -52,5 +66,14 @@ export default {
   padding: 0 20px;
   line-height: 64px;
   font-size: 20px;
+}
+.logo {
+  height: 64px;
+  line-height: 64px;
+  text-align: center;
+  overflow: hidden;
+}
+.nav-theme-dark .logo {
+  color: #ffffff;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div>Ant Design Vue Pro menu</div>
+  <div>menu</div>
 </template>
 
 <script>
