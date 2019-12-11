@@ -7,9 +7,10 @@
         :theme="navTheme"
         collapsible
         :trigger="null"
+        :width="256"
       >
         <div class="logo">Ant Design Vue Pro</div>
-        <SideMenu></SideMenu>
+        <SideMenu :theme="navTheme" :menu-fold="collapsed"></SideMenu>
       </a-layout-sider>
       <a-layout>
         <a-layout-header style="background: #fff; padding: 0">

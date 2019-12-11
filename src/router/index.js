@@ -9,6 +9,7 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/user',
+    hiddenInMenu: true,
     component: () =>
       import(/* webpackChunkName: "user-layout" */ '../layouts/UserLayout.vue'),
     children: [
@@ -34,15 +35,20 @@ const routes = [
   },
   {
     path: '/dashboard',
-    name: 'dashboard',
+    meta: { icon: 'dashboard', title: '仪表盘' },
     component: () =>
       import(
         /* webpackChunkName: "basic-layout" */ '../layouts/BasicLayout.vue'
       ),
     children: [
       {
+        path: '',
+        redirect: 'analysis'
+      },
+      {
         path: 'analysis',
         name: 'analysis',
+        meta: { icon: 'bar-chart', title: '分析页' },
         component: () =>
           import(
             /* webpackChunkName: "analysis" */ '../views/Dashboard/Analysis.vue'
@@ -51,6 +57,7 @@ const routes = [
       {
         path: 'monitor',
         name: 'monitor',
+        meta: { icon: 'line-chart', title: '监控页' },
         component: () =>
           import(
             /* webpackChunkName: "monitor" */ '../views/Dashboard/Monitor.vue'
@@ -60,15 +67,20 @@ const routes = [
   },
   {
     path: '/form',
-    name: 'form',
+    meta: { icon: 'form', title: '表单页' },
     component: () =>
       import(
         /* webpackChunkName: "basic-layout" */ '../layouts/BasicLayout.vue'
       ),
     children: [
       {
+        path: '',
+        redirect: 'basic-form'
+      },
+      {
         path: 'basic-form',
         name: 'basic-form',
+        meta: { icon: 'right-square', title: '基础表单' },
         component: () =>
           import(
             /* webpackChunkName: "basic-form" */ '../views/Form/BasicForm.vue'
@@ -76,7 +88,8 @@ const routes = [
       },
       {
         path: 'step-form',
-        name: 'step-form',
+        hiddenChildrenInMenu: true,
+        meta: { icon: 'ordered-list', title: '分步表单' },
         component: { render: h => h('router-view') },
         children: [
           {
@@ -112,6 +125,7 @@ const routes = [
       {
         path: 'advanced-form',
         name: 'advanced-form',
+        meta: { icon: 'align-left', title: '高级表单' },
         component: () =>
           import(
             /* webpackChunkName: "advanced-form" */ '../views/Form/AdvancedForm.vue'
@@ -122,11 +136,13 @@ const routes = [
   {
     path: '/',
     name: 'home',
+    hiddenInMenu: true,
     redirect: '/dashboard/analysis'
   },
   {
     path: '*',
     name: '404',
+    hiddenInMenu: true,
     component: NotFound
   }
 ]
